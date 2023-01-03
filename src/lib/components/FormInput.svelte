@@ -1,0 +1,27 @@
+<script lang="ts">
+	export let value: string;
+	export let id: string;
+	export let label: string;
+	export let placeholder = '';
+	export let type: string = 'text';
+
+	const handleInput = (e: any) => {
+		// in here, you can switch on type and implement
+		// whatever behavior you need
+		value = type.match(/^(number|range)$/) ? +e.target.value : e.target.value;
+	};
+</script>
+
+<div class="pb-3.5 w-full">
+	<label for={id} class="pl-0.5 text-sm font-medium text-gray-700">{label}</label>
+
+	<input
+		{type}
+		{id}
+		{value}
+		{placeholder}
+		name={id}
+		on:input={handleInput}
+		class="w-full rounded border outline-none border-gray focus:border-orange-500 text-sm h-10 py-2 px-3 mt-1"
+	/>
+</div>

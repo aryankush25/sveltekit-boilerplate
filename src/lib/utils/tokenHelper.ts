@@ -1,4 +1,4 @@
-import R from 'ramda';
+import * as R from 'ramda';
 import { getCookie, isPresent } from './helpers';
 
 export const ACCESS_TOKEN = 'fifo-access-token';

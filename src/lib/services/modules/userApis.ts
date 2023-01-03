@@ -1,4 +1,4 @@
-import R from 'ramda';
+import * as R from 'ramda';
 import request from '../request';
 import { isPresent } from 'src/lib/utils/helpers';
 import { setTokens } from 'src/lib/utils/tokenHelper';

@@ -2,22 +2,74 @@
 	import { goto } from '$app/navigation';
 	import FormButton from '$lib/components/FormButton.svelte';
 	import FormInput from '$lib/components/FormInput.svelte';
+	import { isNilOrEmpty, isPhoneNumberValid } from '$lib/utils/helpers';
 	// import apis from '../../../lib/services/index';
 	import { AsyncStates } from '../../../lib/utils/enums';
 
-	let countryCode = '+91';
+	let countryCode: any = 'IN';
 	let phoneNumber = '';
 	let password = '';
 	let apiState = AsyncStates.initial;
-	let errors = {};
+	let errors: {
+		phoneNumber: null | string;
+		password: null | string;
+	} = {
+		phoneNumber: null,
+		password: null
+	};
 
-	$: {
-		console.log('$$$$ phoneNumber', phoneNumber);
-		console.log('$$$$ password', password);
-		console.log('$$$$ errors', errors);
-	}
+	const validate = (fieldId: 'phoneNumber' | 'password', fieldValue: string) => {
+		if (fieldId === 'phoneNumber') {
+			if (isNilOrEmpty(fieldValue)) {
+				errors.phoneNumber = 'Phone number is required';
+			} else if (!isPhoneNumberValid(fieldValue, countryCode)) {
+				errors.phoneNumber = 'Phone number is not valid';
+			} else {
+				errors.phoneNumber = null;
+			}
+
+			return errors.phoneNumber;
+		} else if (fieldId === 'password') {
+			if (isNilOrEmpty(fieldValue)) {
+				errors.password = 'Password is required';
+			} else if (fieldValue.length < 8) {
+				errors.password = 'Password must be at least 8 characters';
+			} else {
+				errors.password = null;
+			}
+
+			return errors.password;
+		}
+	};
+
+	const resetValidation = (fieldId: 'phoneNumber' | 'password') => {
+		if (fieldId === 'phoneNumber') {
+			errors.phoneNumber = null;
+		} else if (fieldId === 'password') {
+			errors.password = null;
+		}
+	};
+
+	const handelOnBlur = (event: any) => {
+		const fieldId = event.target.id;
+		const fieldValue = event.target.value;
+
+		validate(fieldId, fieldValue);
+	};
+	const handelOnInput = (event: any) => {
+		const fieldId = event.detail.id;
+
+		resetValidation(fieldId);
+	};
 
 	const handleSubmit = async () => {
+		const isInValidPhoneNumber = validate('phoneNumber', phoneNumber);
+		const isInValidPassword = validate('password', password);
+
+		if (isInValidPhoneNumber || isInValidPassword) {
+			return;
+		}
+
 		apiState = AsyncStates.inProgress;
 
 		const response: any = {}; //await apis.userApis.initiateSignUpUserApi(phoneNumber);
@@ -28,16 +80,6 @@
 		} else {
 			apiState = AsyncStates.error;
 		}
-	};
-
-	const handelOnBlur = (event: any) => {
-		console.log('#### handelOnBlur event', event);
-	};
-	const handelOnFocus = (event: any) => {
-		console.log('#### handelOnFocus event', event);
-	};
-	const handelOnInput = (event: any) => {
-		console.log('#### handelOnInput event', event);
 	};
 </script>
 
@@ -58,9 +100,9 @@
 			id="phoneNumber"
 			label="Phone"
 			placeholder="Enter phone number"
+			error={errors.phoneNumber}
 			bind:value={phoneNumber}
 			on:blur={handelOnBlur}
-			on:focus={handelOnFocus}
 			on:input={handelOnInput}
 		/>
 	</div>
@@ -71,9 +113,9 @@
 			id="password"
 			label="Password"
 			placeholder="Enter password"
+			error={errors.password}
 			bind:value={password}
 			on:blur={handelOnBlur}
-			on:focus={handelOnFocus}
 			on:input={handelOnInput}
 		/>
 	</div>

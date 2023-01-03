@@ -1,5 +1,5 @@
 // import { Blob } from 'buffer';
-import R from 'ramda';
+import * as R from 'ramda';
 import { clearTokens, getTokens } from '../../utils/tokenHelper';
 import { isPresent } from '../../utils/helpers';
 import type { ApiRequestMethods } from '../../utils/enums';

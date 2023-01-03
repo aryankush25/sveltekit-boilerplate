@@ -1,4 +1,4 @@
-import R from 'ramda';
+import * as R from 'ramda';
 import { isValidPhoneNumber, parsePhoneNumber, type CountryCode } from 'libphonenumber-js';
 
 export const isNilOrEmpty = R.anyPass([R.isNil, R.isEmpty]);

@@ -9,10 +9,12 @@
 	let phoneNumber = '';
 	let password = '';
 	let apiState = AsyncStates.initial;
+	let errors = {};
 
 	$: {
 		console.log('$$$$ phoneNumber', phoneNumber);
 		console.log('$$$$ password', password);
+		console.log('$$$$ errors', errors);
 	}
 
 	const handleSubmit = async () => {
@@ -52,6 +54,7 @@
 
 	<div class="w-96 mt-6">
 		<FormInput
+			type="number"
 			id="phoneNumber"
 			label="Phone"
 			placeholder="Enter phone number"
@@ -64,6 +67,7 @@
 
 	<div class="w-96">
 		<FormInput
+			type="password"
 			id="password"
 			label="Password"
 			placeholder="Enter password"

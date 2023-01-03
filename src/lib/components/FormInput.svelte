@@ -13,7 +13,7 @@
 	const handleInput = (e: any) => {
 		value = type.match(/^(number|range)$/) ? +e.target.value : e.target.value;
 
-		dispatch('input', { value });
+		dispatch('input', { value, id });
 	};
 </script>
 

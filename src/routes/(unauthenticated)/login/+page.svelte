@@ -74,7 +74,11 @@
 		/>
 	</div>
 
-	<div class="w-96 mt-6">
+	<a class="text-sm text-orange-500 text-right" href="/forgot-password?source=glue"
+		>Forgot Password ?</a
+	>
+
+	<div class="w-96 mt-3">
 		<FormButton
 			bind:apiState
 			label="Login"
@@ -82,4 +86,9 @@
 			successLabel="Redirecting..."
 		/>
 	</div>
+
+	<p class="text-center text-gray-500 pt-6">
+		Don't have an account?
+		<a class="font-bold text-orange-500" href="/signup?source=glue">Sign up for free!</a>
+	</p>
 </form>

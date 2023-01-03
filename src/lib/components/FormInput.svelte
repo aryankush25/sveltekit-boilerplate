@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
 	export let value: string;
 	export let id: string;
 	export let label: string;
@@ -6,9 +10,9 @@
 	export let type: string = 'text';
 
 	const handleInput = (e: any) => {
-		// in here, you can switch on type and implement
-		// whatever behavior you need
 		value = type.match(/^(number|range)$/) ? +e.target.value : e.target.value;
+
+		dispatch('input', { value });
 	};
 </script>
 
@@ -22,6 +26,8 @@
 		{placeholder}
 		name={id}
 		on:input={handleInput}
+		on:blur
+		on:focus
 		class="w-full rounded border outline-none border-gray focus:border-orange-500 text-sm h-10 py-2 px-3 mt-1"
 	/>
 </div>

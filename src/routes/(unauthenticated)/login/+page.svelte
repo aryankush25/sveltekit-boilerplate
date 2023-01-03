@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import FormButton from '$lib/components/FormButton.svelte';
-	import Input from '$lib/components/FormInput.svelte';
+	import FormInput from '$lib/components/FormInput.svelte';
 	// import apis from '../../../lib/services/index';
 	import { AsyncStates } from '../../../lib/utils/enums';
 
@@ -9,6 +9,11 @@
 	let phoneNumber = '';
 	let password = '';
 	let apiState = AsyncStates.initial;
+
+	$: {
+		console.log('$$$$ phoneNumber', phoneNumber);
+		console.log('$$$$ password', password);
+	}
 
 	const handleSubmit = async () => {
 		apiState = AsyncStates.inProgress;
@@ -21,6 +26,16 @@
 		} else {
 			apiState = AsyncStates.error;
 		}
+	};
+
+	const handelOnBlur = (event: any) => {
+		console.log('#### handelOnBlur event', event);
+	};
+	const handelOnFocus = (event: any) => {
+		console.log('#### handelOnFocus event', event);
+	};
+	const handelOnInput = (event: any) => {
+		console.log('#### handelOnInput event', event);
 	};
 </script>
 
@@ -36,16 +51,27 @@
 	<h1 class="text-3xl font-bold">Login</h1>
 
 	<div class="w-96 mt-6">
-		<Input
+		<FormInput
 			id="phoneNumber"
 			label="Phone"
-			bind:value={phoneNumber}
 			placeholder="Enter phone number"
+			bind:value={phoneNumber}
+			on:blur={handelOnBlur}
+			on:focus={handelOnFocus}
+			on:input={handelOnInput}
 		/>
 	</div>
 
 	<div class="w-96">
-		<Input id="password" label="Password" bind:value={password} placeholder="Enter password" />
+		<FormInput
+			id="password"
+			label="Password"
+			placeholder="Enter password"
+			bind:value={password}
+			on:blur={handelOnBlur}
+			on:focus={handelOnFocus}
+			on:input={handelOnInput}
+		/>
 	</div>
 
 	<div class="w-96 mt-6">

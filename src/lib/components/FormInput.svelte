@@ -10,10 +10,14 @@
 	export let type: string = 'text';
 	export let error: string = '';
 
-	const handleInput = (e: any) => {
-		value = type.match(/^(number|range)$/) ? +e.target.value : e.target.value;
+	const handleInput = (event: any) => {
+		value = type.match(/^(number|range)$/)
+			? event.target.value
+				? +event.target.value
+				: event.target.value
+			: event.target.value;
 
-		dispatch('input', { value, id });
+		dispatch('input', { value, id, event });
 	};
 </script>
 

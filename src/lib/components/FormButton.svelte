@@ -9,7 +9,7 @@
 
 <input
 	type="submit"
-	class="w-full rounded bg-orange-500 font-medium h-11 py-2 px-3 text-white outline-none"
+	class="w-full rounded bg-orange-500 font-medium h-11 py-2 px-3 text-white outline-none hover:cursor-pointer"
 	value={apiState === AsyncStates.inProgress
 		? inProgressLabel
 		: apiState === AsyncStates.success

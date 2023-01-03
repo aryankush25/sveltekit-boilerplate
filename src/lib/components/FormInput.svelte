@@ -8,6 +8,7 @@
 	export let label: string;
 	export let placeholder = '';
 	export let type: string = 'text';
+	export let error: string = '';
 
 	const handleInput = (e: any) => {
 		value = type.match(/^(number|range)$/) ? +e.target.value : e.target.value;
@@ -16,7 +17,7 @@
 	};
 </script>
 
-<div class="pb-3.5 w-full">
+<div class="pb-1 w-full">
 	<label for={id} class="pl-0.5 text-sm font-medium text-gray-700">{label}</label>
 
 	<input
@@ -30,4 +31,6 @@
 		on:focus
 		class="w-full rounded border outline-none border-gray focus:border-orange-500 text-sm h-10 py-2 px-3 mt-1"
 	/>
+
+	<div class="pl-0.5 text-sm font-medium text-red-500 h-5" class:invisible={!error}>{error}</div>
 </div>

@@ -1,5 +1,5 @@
 {
-	"name": "gl-user-identification-web-svelte",
+	"name": "gl-sveltekit-boilerplate",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {

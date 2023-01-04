@@ -4,13 +4,13 @@ let serverUrl = 'http://localhost:4000';
 
 switch (PUBLIC_ENV) {
 	case 'base':
-		serverUrl = 'https://user.glue.is';
+		serverUrl = 'https://gluelabs.com';
 		break;
 
 	case 'beta':
 	case 'qa':
 	case 'qa2':
-		serverUrl = 'https://user.' + PUBLIC_ENV + '.glue.is';
+		serverUrl = 'https://' + PUBLIC_ENV + '.gluelabs.com';
 		break;
 	default:
 		break;
